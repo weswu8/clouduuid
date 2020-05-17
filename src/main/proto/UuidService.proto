@@ -1,0 +1,38 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.weswu.clouduuid.grpc;
+
+enum UuidType{
+  SEQUENTIAL = 0;
+  SNOWFLAKE = 1;
+}
+service UuidController {
+  rpc createSequentiallIdSpace (CreateSequentialIdSpaceReq) returns (CommonResp) {}
+  rpc deleteSequentiallIdSpace (SequentialIdReq) returns (CommonResp) {}
+  rpc deleteAllIdSpaces (Empty) returns (CommonResp) {}
+  rpc getSequentialId(SequentialIdReq) returns (UuidResp) {}
+  rpc getSnowFlakeId(Empty) returns (UuidResp) {}
+  rpc getCachedSnowFlakeId(Empty) returns (UuidResp) {}
+}
+
+message SequentialIdReq{
+  string domain = 1;
+  string tag = 2;
+}
+
+message CreateSequentialIdSpaceReq{
+  string domain = 1;
+  string tag = 2;
+  string description = 3;
+}
+
+message Empty{
+}
+
+message UuidResp{
+  int64 uuid = 1;
+}
+
+message CommonResp{
+  string content = 1;
+}

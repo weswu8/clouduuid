@@ -1,0 +1,9 @@
+CREATE TABLE uuidspace (
+  NameSpace STRING(1024) NOT NULL,
+  Tag STRING(1024) NOT NULL,
+  MinId INT64 NOT NULL,
+  MaxId INT64 NOT NULL,
+  Description STRING(MAX),
+  WorkerId STRING(1024) NOT NULL,
+  Updated INT64 NOT NULL
+) PRIMARY KEY (NameSpace, Tag)
