@@ -27,10 +27,11 @@ it is a 64 bits number(long), the timestamp is based on the true time of the spa
 * Based on true time came from spanner system
 * Id is generated strictly by true time
 * the default bits of that three fields are as follows:
- ***+------+----------------------+----------------+-----------+
- ***| sign |     delta seconds    | worker node id | sequence  |
- ***+------+----------------------+----------------+-----------+
- ***  1bit          41bits              10bits         12bits
+
++------+----------------------+----------------+-----------+
+| sign |     delta seconds    | worker node id | sequence  |
++------+----------------------+----------------+-----------+
+  1bit          41bits              10bits         12bits
 
 ### gprc function:
 	rpc getSnowFlakeId(Empty) returns (UuidResp) {}
@@ -57,7 +58,9 @@ it is basically the same as the snowflake model except that it takes buffered ti
 
 ## installation
 ### Precondition
-	you should have a gcp account, and you should create and download the service account json file.[how to do this?](https://cloud.google.com/docs/authentication/getting-started). pls put the file into the class resource directory
+	you should have a gcp account, and you should create and download the service account json file.
+	[how to do this?](https://cloud.google.com/docs/authentication/getting-started). pls put the file 
+	into the class resource directory
 ### 1.create spanner
     create the spanner instance [spnner](https://cloud.google.com/spanner/docs/quickstart-console).
     and create the table:
@@ -87,49 +90,10 @@ CREATE TABLE uuidspace (
 	datacenter.id:1
 	grpc.port: 8080
 
-### final.Start the blobfs service
-    lanuch gcsfuse-win.exe
+### final.Start the service
+    java -jar clouduuid-1.0.0-SNAPSHOT.jar
 	
-It is highly recommended that you should config it as a windows services.
-
-## Tips
-* the block blob is read only by default. marked with read only flag in the popup properties windows.
-* due to you can mount the multiple buckets/buckets/folders, so the size number of the mounted folder is not real.
-
-
-## Performance Test
-* The performance depends on the machine and the network. for the VMs within the same region with the blob service, The average bandwidth is 20 ~ 30MB/s
-
-## Dependency
-* [WinFsp](https://github.com/billziss-gh/winfsp): Great Windows File System Proxy - FUSE for Windows.
-
 
 ## Limitation and known issues:
-* Due to the overhead of fuse system, the performance will be expected slower than native file system. 
-* For the file copy, the blobfs will use read out - then write in to new blob mode. this will spent more time for large files/folders.
-* In some cases for the desktop user, right-click these files (*.PPT(X), *.DOC(X)) may casue very slow response.
-* In Windows UI, copy the folder with many small files will be very slow. you can zip it. use robocopy or other tools.
+* bug of the imported plug "opencensus-exporter-trace-stackdriver"
 
-## Supported platforms
-* windows
-
-
-## Command Line Usage
-	usage: Blobfs-Win OPTIONS
-
-	options:
-		-d DebugFlags       [-1: enable all debug logs]
-		-D DebugLogFile     [file path; use - for stderr]
-		-i                  [case insensitive file system]
-		-t FileInfoTimeout  [millis]
-		-n MaxFileNodes
-		-s MaxFileSize      [bytes]
-		-F FileSystemName]
-		-m MountPoint       [X:|* (required if no UNC prefix)]s
-
-## License
-	Copyright (C) 2020 Wesley Wu jie1975.wu@gmail.com
-	This code is licensed under The General Public License version 3
-	
-## FeedBack
-	Your feedbacks are highly appreciated! :)
