@@ -26,12 +26,7 @@ An unique id consists of worker node, timestamp and sequence within that timesta
 it is a 64 bits number(long), the timestamp is based on the true time of the spanner. 
 * Based on true time came from spanner system
 * Id is generated strictly by true time
-* the default bits of that three fields are as follows:
-
-+------+----------------------+----------------+-----------+
-| sign |     delta seconds    | worker node id | sequence  |
-+------+----------------------+----------------+-----------+
-  1bit          41bits              10bits         12bits
+* the default bits of that three fields are as delta seconds, datacenter id, worker id, sequence
 
 ### gprc function:
 	rpc getSnowFlakeId(Empty) returns (UuidResp) {}
