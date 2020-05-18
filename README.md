@@ -89,6 +89,10 @@ CREATE TABLE uuidspace (
     java -jar clouduuid-1.0.0-SNAPSHOT.jar
 	
 
+## reference
+*  Leaf from meituan
+*  uid-gernartor from baidu
+
 ## Limitation and known issues:
 * bug of the imported plug "opencensus-exporter-trace-stackdriver"
 
