@@ -85,11 +85,11 @@ CREATE TABLE uuidspace (
 	datacenter.id:1
 	grpc.port: 8080
 
-### final.Start the service
+### 3.final.Start the service
     java -jar clouduuid-1.0.0-SNAPSHOT.jar
 	
 
-## reference
+## Reference
 *  Leaf from meituan
 *  uid-gernartor from baidu
 
